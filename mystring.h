@@ -31,6 +31,10 @@ public:
 
 	MyString& operator+=(char ch);
 	MyString& operator+=(const char* str);
+	void clear();
+	size_t find(char ch, size_t pos = 0) const;
+	size_t find(const char* sub, size_t pos = 0) const;
+	static const size_t npos;
 private:
 	char* _str = nullptr;
 	size_t _size = 0;
