@@ -159,3 +159,41 @@ const size_t MyString::npos = -1;
 		}
 		return p - _str;
 	}
+	MyString& MyString::operator=(MyString other)
+	{
+		swap(other);
+		return *this;
+	}
+	void MyString::insert(size_t pos, char ch)
+	{
+		assert(pos <= _size);
+		if (_size == _capacity) {
+			reserve(_capacity == 0 ? 4 : _capacity * 2);
+		}
+		memmove(_str + pos + 1, _str + pos, _size - pos + 1);
+		_str[pos] = ch;
+		++_size;
+	}
+	void MyString::insert(size_t pos, const char* str)
+	{
+		assert(pos <= _size);
+		if (str == nullptr) {
+			return ;
+		}
+		MyString temp(str);
+		size_t len = strlen(str);
+		if (len == 0) {
+			return;
+		}
+		if (_size + len > _capacity)
+		{
+			size_t newcapacity = _capacity == 0 ? len : _capacity;
+			while (newcapacity < _size + len) {
+				newcapacity *= 2;
+			}
+			reserve(newcapacity);
+		}
+		memmove(_str + pos + len, _str + pos, _size - pos + 1);
+		memcpy(_str + pos, str, len);
+		_size += len;
+	}

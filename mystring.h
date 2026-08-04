@@ -31,9 +31,12 @@ public:
 
 	MyString& operator+=(char ch);
 	MyString& operator+=(const char* str);
+	MyString& operator=(MyString other);
 	void clear();
 	size_t find(char ch, size_t pos = 0) const;
 	size_t find(const char* sub, size_t pos = 0) const;
+	void insert(size_t pos, char ch);
+	void insert(size_t pos, const char* str);
 	static const size_t npos;
 private:
 	char* _str = nullptr;
