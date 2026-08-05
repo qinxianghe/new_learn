@@ -197,3 +197,34 @@ const size_t MyString::npos = -1;
 		memcpy(_str + pos, str, len);
 		_size += len;
 	}
+	void MyString::erase(size_t pos, size_t len)
+	{
+		assert(pos <= _size);
+		if (pos == _size || len == 0) {
+			return;
+		}
+		if (len == npos || len > _size - pos + 1) {
+			_size = pos;
+			_str[_size] = '\0';
+			return;
+		}
+		memmove(_str + pos, _str + pos + len, _size - pos - len + 1);
+		_size -= len;
+
+	}
+	MyString MyString::substr(size_t pos, size_t len)const
+	{
+		assert(pos <= _size);
+		size_t reallen = len;
+		if (len == npos || len > _size - pos) {
+			reallen = _size - pos;
+		}
+		MyString temp;
+		temp.reserve(reallen);
+		if (reallen > 0) {
+			memcpy(temp._str, _str + pos, reallen);
+		}
+		temp._size = reallen;
+		temp._str[temp._size] = '\0';
+		return temp;
+	}

@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <string>
+
 class MyString {
 public:
 	typedef char* iterator;
@@ -37,6 +38,8 @@ public:
 	size_t find(const char* sub, size_t pos = 0) const;
 	void insert(size_t pos, char ch);
 	void insert(size_t pos, const char* str);
+	void erase(size_t pos, size_t len = npos);
+	MyString substr(size_t pos = 0, size_t len = npos )const;
 	static const size_t npos;
 private:
 	char* _str = nullptr;
