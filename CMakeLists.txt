@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.21)
+project(cpp_review LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+foreach(example IN ITEMS overloads_and_file_io layout_and_endianness copy_and_assignment stream_operators)
+  add_executable(${example} examples/${example}.cpp)
+  target_include_directories(${example} PRIVATE include)
+endforeach()
